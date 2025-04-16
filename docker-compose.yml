@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  dev:
+    container_name: pikka-portfolio-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: always
+    ports:
+      - "3020:3020"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./src
+          target: /app/src
